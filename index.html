@@ -111,8 +111,15 @@
       color: #ffb6c1;
       border: 2px solid rgba(255, 182, 193, 0.3);
       cursor: default;
-      position: absolute;
       transition: all 0.2s ease;
+    }
+
+    .btn-no-container {
+      width: 100%;
+      max-width: 280px;
+      margin: 30px auto 0;
+      position: relative;
+      height: 60px;
     }
 
     .date-card {
@@ -209,6 +216,8 @@
 
     <div class="btn-group" id="btnGroup">
       <button class="btn btn-yes" id="btnSim" onclick="goToScreen2()">SIM 😍</button>
+    </div>
+    <div class="btn-no-container" id="btnNoContainer">
       <button class="btn btn-no" id="btnNao">NÃO 😅</button>
     </div>
     <div class="funny-text" style="margin-top:40px;">* O "não" é só decorativo, tá? 😏</div>
@@ -275,20 +284,15 @@
   let noClicked = 0;
 
   function moveButton() {
-    const group = document.getElementById('btnGroup');
-    const groupRect = group.getBoundingClientRect();
+    const container = document.getElementById('btnNoContainer');
+    const containerRect = container.getBoundingClientRect();
     const btnRect = btnNao.getBoundingClientRect();
 
-    const maxX = groupRect.width - btnRect.width - 10;
-    const maxY = groupRect.height - btnRect.height - 10;
+    const maxX = containerRect.width - btnRect.width - 10;
+    const maxY = containerRect.height - btnRect.height - 10;
 
-    let newX, newY;
-    let attempts = 0;
-    do {
-      newX = Math.random() * maxX;
-      newY = Math.random() * maxY;
-      attempts++;
-    } while (attempts < 20);
+    let newX = Math.random() * maxX;
+    let newY = Math.random() * maxY;
 
     btnNao.style.left = newX + 'px';
     btnNao.style.top = newY + 'px';
@@ -304,17 +308,19 @@
     } else if (noClicked === 3) {
       btnNao.textContent = 'Teimosa hein! 🫵😆';
     } else if (noClicked === 4) {
-      btnNao.textContent = 'TU É BURRA É? 😂';
+      btnNao.textContent = 'Tão teimosa! 😂';
     } else if (noClicked === 5) {
-      btnNao.textContent = 'VAI TOMAR NO CU 🖕 KKKKK';
+      btnNao.textContent = 'Desiste, vai ser divertido! 🥹';
     } else {
       const frases = [
-        'NÃO TEM COMO FUGIR! 😈',
-        'SAIR CONVOSCO É TEU DESTINO ⚡',
-        'ACEITA LOGO POXA 🤬',
-        'VAI FICAR TENTANDO ATÉ QUANDO? 😭',
-        'O NÃO NÃO EXISTE HOJE 😌',
-        'PODE CLICAR VONTADE NÃO TEM 😴',
+        'Não tem como fugir! 😈',
+        'Sair comigo é seu destino ⚡',
+        'Você sabe que quer! 🥰',
+        'Vai ficar tentando até quando? 😭',
+        'O não não existe hoje 😌',
+        'Pode clicar, não adianta 😴',
+        'Já foi, ja era! 😏',
+        'Desiste e clica logo 💕',
       ];
       btnNao.textContent = frases[Math.floor(Math.random() * frases.length)];
     }
